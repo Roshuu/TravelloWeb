@@ -1,0 +1,44 @@
+﻿
+<partial name="_Notifications" />
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Travel List</h2>
+        </div>
+
+        <div class="col-6 text-end">
+            <a asp-controller="Travel" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp; Add New Travel
+            </a>
+        </div>
+    </div>
+
+<br />
+<br />
+
+<table id="tblData" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Price $</th>
+            <th>Guide Name</th>
+            <th>Guide Surname</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+
+
+</table>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/travel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+}

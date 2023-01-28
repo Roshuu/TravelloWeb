@@ -1,0 +1,99 @@
+﻿@model Travello.Models.ViewModels.ProductVM
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <input asp-for="Travel.Id" hidden/>
+     <input asp-for="Travel.ImageUrl" hidden/>
+    <div class="border p-3 mt-4 row">
+            <div class="row pb-2">
+                <h2 class="text-primary">@(Model.Travel.Id!=0?"Update":"Create") Travel</h2>
+             </div>
+
+         <br /> <br />
+
+
+         <div class="mb-3">
+            <label asp-for="Travel.Name">Name</label>
+            <input asp-for="Travel.Name" class="form-control" />
+            <span asp-validation-for="Travel.Name" class="text-danger"></span>
+         </div>
+        <div class="mb-3">
+            <label asp-for="Travel.Description">Description</label>
+            <textarea asp-for="Travel.Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Travel.Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-6">
+            <label asp-for="Travel.Country">Country</label>
+            <input asp-for="Travel.Country" class="form-control" />
+            <span asp-validation-for="Travel.Country" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Travel.City">City</label>
+            <input asp-for="Travel.City" class="form-control" />
+            <span asp-validation-for="Travel.City" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-6">
+            <label asp-for="Travel.TravelTime">Date</label>
+            <input asp-for="Travel.TravelTime" class="form-control" />
+            <span asp-validation-for="Travel.TravelTime" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-6">
+            <label asp-for="Travel.Price">Price</label>
+            <input asp-for="Travel.Price" class="form-control" />
+            <span asp-validation-for="Travel.Price" class="text-danger"></span>
+        </div>
+       
+
+        <div class="mb-3">
+            <label asp-for="Travel.ImageUrl"></label>
+            <input type="file" id="uploadBox" name="file" class="form-control"/>      
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Travel.GuideId">Name</label>
+            <select asp-for="Travel.GuideId" asp-items="@Model.GuideList" class="form-select">
+                <option disabled selected>---Select Guide---</option>
+
+            </select>
+            <span asp-validation-for="Travel.GuideId" class="text-danger"></span>
+        </div>
+
+        <div class="col-12">
+            @if (Model.Travel.Id != 0)
+            {
+                <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+            }
+            else
+            {
+                <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+            }
+         
+        <a asp-controller="Travel" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name ="_ValidationScriptsPartial"/>
+    }
+
+    <script>
+        function ValidateInput(){
+            if(document.getElementById("uploadBox").value==""){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please upload an Image!',
+                
+            });
+            return false;
+        }
+          return true;
+        }
+    </script>
+
+}

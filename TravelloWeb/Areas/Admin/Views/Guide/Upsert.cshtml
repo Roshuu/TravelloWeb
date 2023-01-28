@@ -1,0 +1,78 @@
+﻿@model Guide
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <input asp-for="Id" hidden/>
+     <input asp-for="ImageUrl" hidden/>
+    <div class="border p-3 mt-4 row">
+            <div class="row pb-2">
+                <h2 class="text-primary">@(Model.Id!=0?"Update":"Create") Guide</h2>
+             </div>
+
+         <br /> <br />
+
+
+         <div class="mb-3">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+         </div>
+
+        <div class="mb-3">
+            <label asp-for="Surname">Surname</label>
+            <textarea asp-for="Surname" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Description">Description</label>
+            <textarea asp-for="Description" rows="3" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+    
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl"></label>
+            <input type="file" id="uploadBox" name="file" class="form-control"/>      
+        </div>
+
+
+       
+
+        <div class="col-12">
+            @if (Model.Id != 0)
+            {
+                <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+            }
+            else
+            {
+                <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+            }
+         
+        <a asp-controller="Guide" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name ="_ValidationScriptsPartial"/>
+    }
+
+    <script>
+        function ValidateInput(){
+            if(document.getElementById("uploadBox").value==""){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please upload an Image!',
+                
+            });
+            return false;
+        }
+          return true;
+        }
+    </script>
+
+}
